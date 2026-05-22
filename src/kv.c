@@ -1,4 +1,4 @@
-#include <kv.h>
+#include "../inc/kv.h"
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
@@ -48,7 +48,7 @@ int kv_put(kv_t *db, const char *key, const char *value) {
 
   size_t idx = hash(key, db->capacity);
 
-  for (int i = 0; i < db->capacity - 1; i++) {
+  for (int i = 0; i < (int)db->capacity - 1; i++) {
     size_t real_idx = (idx + i) % db->capacity;
     kv_entry_t *e = &db->entries[real_idx];
 
@@ -96,7 +96,7 @@ char *kv_get(kv_t *db, const char *key) {
 
   size_t idx = hash(key, db->capacity);
 
-  for (int i = 0; i < db->capacity - 1; i++) {
+  for (int i = 0; i < (int)db->capacity - 1; i++) {
     size_t real_idx = (idx + i) % db->capacity;
     kv_entry_t *e = &db->entries[real_idx];
 
@@ -127,7 +127,7 @@ int kv_delete(kv_t *db, const char *key) {
 
   size_t idx = hash(key, db->capacity);
 
-  for (int i = 0; i < db->capacity - 1; i++) {
+  for (int i = 0; i < (int)db->capacity - 1; i++) {
     size_t real_idx = (idx + i) % db->capacity;
     kv_entry_t *e = &db->entries[real_idx];
 
@@ -156,7 +156,7 @@ int kv_delete(kv_t *db, const char *key) {
 void kv_free(kv_t *db) {
   if (!db)
     return;
-  for (int i = 0; i < db->capacity - 1; i++) {
+  for (int i = 0; i < (int)db->capacity - 1; i++) {
     kv_entry_t *e = &db->entries[i];
     if (e->key && e->key != TOMBSTONE) {
       free(e->key);
