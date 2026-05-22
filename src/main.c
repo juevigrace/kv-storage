@@ -1,4 +1,4 @@
-#include "../inc/kv.h"
+#include <kv.h>
 #include <stdio.h>
 
 int main() {
