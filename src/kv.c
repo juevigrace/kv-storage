@@ -41,7 +41,7 @@ size_t hash(const char *val, int capacity) {
 //  - value: a pointer to the value itself
 // returns: the index of the key, otherwise on
 // error, returns -1, on not found returns -2
-int kv_put(kv_t *db, const char *key, const char *value) {
+int kv_put(kv_t *db, char *key, char *value) {
   if (!db || !key || !value) {
     return -1;
   }
@@ -89,7 +89,7 @@ int kv_put(kv_t *db, const char *key, const char *value) {
 //  - key: a pointer to the key value
 // returns: the pointer to the key
 // NULL if not found
-char *kv_get(kv_t *db, const char *key) {
+char *kv_get(kv_t *db, char *key) {
   if (!db || !key) {
     return NULL;
   }
@@ -120,7 +120,7 @@ char *kv_get(kv_t *db, const char *key) {
 //  - key: a pointer to the key value
 // returns: the index of the deletion
 // -1 if not found
-int kv_delete(kv_t *db, const char *key) {
+int kv_delete(kv_t *db, char *key) {
   if (!db || !key) {
     return -1;
   }
