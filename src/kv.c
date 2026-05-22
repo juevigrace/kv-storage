@@ -52,7 +52,7 @@ int kv_put(kv_t *db, char *key, char *value) {
     size_t real_idx = (idx + i) % db->capacity;
     kv_entry_t *e = &db->entries[real_idx];
 
-    // the key is already ser, updating
+    // the key is already set, updating
     if (e->key && e->key != TOMBSTONE && !strcmp(e->key, key)) {
       char *newval = strdup(value);
       if (!newval) {
@@ -60,7 +60,7 @@ int kv_put(kv_t *db, char *key, char *value) {
       }
       free(e->value);
       e->value = newval;
-      return real_idx;
+      return 0;
     }
 
     // land in a slot that is "empty"
@@ -76,7 +76,7 @@ int kv_put(kv_t *db, char *key, char *value) {
       e->value = newval;
       e->key = newkey;
       db->count++;
-      return real_idx;
+      return 0;
     }
   }
 
